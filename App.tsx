@@ -1,8 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import CategoriesScreen from './src/screens/CategoriesScreen';
+import CategoryMealsScreen from './src/screens/CategoryMealsScreen';
+import MealsDetailsScreen from './src/screens/MealsDetailsScreen';
+import Colors from './src/constants//Colors';
+
+type MealsParamList = {
+  CategoriesScreen: undefined;
+  CategoryMealsScreen: undefined;
+  MealsDetailsScreen: undefined;
+};
+
+const MealsStack = createStackNavigator<MealsParamList>();
+
+const MealsStackScreen = () => (
+  <MealsStack.Navigator>
+    <MealsStack.Screen
+      name='CategoriesScreen'
+      component={CategoriesScreen}
+      options={{
+        title: 'Meal Categories',
+        headerStyle: {
+          backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+        },
+        headerTintColor:
+          Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+      }}
+    />
+    <MealsStack.Screen
+      name='CategoryMealsScreen'
+      component={CategoryMealsScreen}
+    />
+    <MealsStack.Screen
+      name='MealsDetailsScreen'
+      component={MealsDetailsScreen}
+    />
+  </MealsStack.Navigator>
+);
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -11,7 +49,7 @@ const fetchFonts = () => {
   });
 };
 
-export default function App() {
+export default () => {
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
   if (!fontLoaded) {
     return (
@@ -22,11 +60,11 @@ export default function App() {
     );
   }
   return (
-    <View style={styles.container}>
-      <Text>The beginning of a tasty meal</Text>
-    </View>
+    <NavigationContainer>
+      <MealsStackScreen />
+    </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

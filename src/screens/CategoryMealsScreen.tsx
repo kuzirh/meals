@@ -1,10 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const CatergoryMealsScreen = () => {
+const CatergoryMealsScreen = (props: {
+  navigation: { push: CallableFunction };
+}) => {
   return (
     <View style={styles.screen}>
       <Text> CatergoryMealsScreen</Text>
+      <Button
+        title='Take me to details'
+        onPress={() => props.navigation.push('MealsDetailsScreen')}
+      />
     </View>
   );
 };
