@@ -2,16 +2,20 @@ import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { CATEGORIES, MEALS } from '../data/dummy-data';
-
+import MealItem from '../components/MealItem';
 const CatergoryMealsScreen = (props: {
   route: { params: { categoryId: string } };
   navigation: { push: CallableFunction };
 }) => {
-  const rederMealItem = (itemData: { item: { title: string } }) => {
+  const rederMealItem = (itemData: {
+    item: { title: string; duration: number };
+  }) => {
     return (
-      <View>
-        <Text>{itemData.item.title}</Text>
-      </View>
+      <MealItem
+        title={itemData.item.title}
+        onSelectMeal={() => {}}
+        duration={itemData.item.duration}
+      />
     );
   };
   const { categoryId } = props.route.params;
@@ -26,6 +30,7 @@ const CatergoryMealsScreen = (props: {
         data={displayedMeals}
         keyExtractor={(item, id) => item.id}
         renderItem={rederMealItem}
+        style={{ width: '100%' }}
       />
     </View>
   );
