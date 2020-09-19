@@ -8,13 +8,27 @@ const CatergoryMealsScreen = (props: {
   navigation: { push: CallableFunction };
 }) => {
   const rederMealItem = (itemData: {
-    item: { title: string; duration: number };
+    item: {
+      title: string;
+      duration: number;
+      complexity: string;
+      affordability: string;
+      imageUrl: string;
+      id: string;
+    };
   }) => {
     return (
       <MealItem
         title={itemData.item.title}
-        onSelectMeal={() => {}}
+        onSelectMeal={() => {
+          props.navigation.push('MealsDetailsScreen', {
+            mealId: itemData.item.id,
+          });
+        }}
         duration={itemData.item.duration}
+        complexity={itemData.item.complexity}
+        affordability={itemData.item.affordability}
+        image={itemData.item.imageUrl}
       />
     );
   };

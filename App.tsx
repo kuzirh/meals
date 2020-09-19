@@ -46,6 +46,14 @@ const MealsStackScreen = () => (
     <MealsStack.Screen
       name='MealsDetailsScreen'
       component={MealsDetailsScreen}
+      options={({ route }) => ({
+        title: route?.params?.mealId,
+        headerStyle: {
+          backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+        },
+        headerTintColor:
+          Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+      })}
     />
   </MealsStack.Navigator>
 );
