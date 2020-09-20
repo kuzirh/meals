@@ -3,20 +3,25 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { CATEGORIES, MEALS } from '../data/dummy-data';
 import MealItem from '../components/MealItem';
-const CatergoryMealsScreen = (props: {
+
+interface CategoryMealsScreenTypes {
   route: { params: { categoryId: string } };
   navigation: { push: CallableFunction };
-}) => {
-  const rederMealItem = (itemData: {
-    item: {
-      title: string;
-      duration: number;
-      complexity: string;
-      affordability: string;
-      imageUrl: string;
-      id: string;
-    };
-  }) => {
+}
+
+interface RenderMealItemTypes {
+  item: {
+    title: string;
+    duration: number;
+    complexity: string;
+    affordability: string;
+    imageUrl: string;
+    id: string;
+  };
+}
+
+const CatergoryMealsScreen = (props: CategoryMealsScreenTypes) => {
+  const rederMealItem = (itemData: RenderMealItemTypes) => {
     return (
       <MealItem
         title={itemData.item.title}

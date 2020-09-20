@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const MealsDetailsScreen = (
-  props: any,
-  route: { params: { mealId: string } }
-) => {
-  const mealId = route.params.mealId;
+interface MealsDetailsScreenTypes {
+  route: { params: { mealId: string } };
+}
+
+const MealsDetailsScreen = (props: MealsDetailsScreenTypes) => {
+  const mealId = props.route.params.mealId;
   return (
     <View style={styles.screen}>
       <Text> MealsDetailsScreen</Text>
