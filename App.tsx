@@ -11,8 +11,8 @@ import Colors from './src/constants//Colors';
 
 type MealsParamList = {
   CategoriesScreen: undefined;
-  CategoryMealsScreen: undefined;
-  MealsDetailsScreen: undefined;
+  CategoryMealsScreen: { categoryTitle: string };
+  MealsDetailsScreen: { mealId: string };
 };
 
 const MealsStack = createStackNavigator<MealsParamList>();
@@ -35,7 +35,7 @@ const MealsStackScreen = () => (
       name='CategoryMealsScreen'
       component={CategoryMealsScreen}
       options={({ route }) => ({
-        title: route?.params?.categoryTitle,
+        title: route.params.categoryTitle,
         headerStyle: {
           backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
         },
@@ -47,7 +47,7 @@ const MealsStackScreen = () => (
       name='MealsDetailsScreen'
       component={MealsDetailsScreen}
       options={({ route }) => ({
-        title: route?.params?.mealId,
+        title: route.params.mealId,
         headerStyle: {
           backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
         },
